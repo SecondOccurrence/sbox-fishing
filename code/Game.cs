@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
 
 //
 // You don't need to put things in a namespace, but it doesn't hurt.
@@ -46,6 +47,36 @@ public partial class MyGame : GameManager
 			var tx = randomSpawnPoint.Transform;
 			tx.Position += Vector3.Up * 50.0f; // raise it up
 			pawn.Transform = tx;
+		}
+	}
+
+	TimeUntil next = 3;
+	public override void FrameSimulate( IClient cl )
+	{
+		base.FrameSimulate( cl );
+		if(next)
+		{
+			var ragdoll = new ModelEntity();
+			ragdoll.SetModel( "models/fish_basic.vmdl" );
+			ragdoll.SetupPhysicsFromModel(PhysicsMotionType.Dynamic, false);
+			ragdoll.Transform = GetSpawnPoint();
+			next = 3;
+		}
+	}
+
+	private static Transform GetSpawnPoint()
+	{
+		var spawnpoints = Entity.All.OfType<SpawnPoint>();
+		var randomSpawnPoint = spawnpoints.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+		if(randomSpawnPoint != null)
+		{
+			var tx = randomSpawnPoint.Transform;
+			tx.Position += Vector3.Up * 50.0f;
+			return tx;
+		}
+		else
+		{
+			return new Transform();
 		}
 	}
 }
