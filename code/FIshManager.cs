@@ -1,32 +1,56 @@
 using Sandbox;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Fishing.Manager;
 
 public partial class MyGame : Sandbox.GameManager
 {
-	TimeUntil next = 2;
+	TimeUntil nextSpawn = GetRandomNum(2, 5);
+	TimeUntil nextDespawn = GetRandomNum(4, 8);
+	List<ModelEntity> fish = new List<ModelEntity>();
 	public override void FrameSimulate( IClient cl )
 	{
 		base.FrameSimulate( cl );
-		if(next)
+		if(nextSpawn)
 		{
-			var ragdoll = new ModelEntity();
-			ragdoll.SetModel( "models/fish_basic.vmdl" );
+			var model = new ModelEntity();
+			model.SetModel( "models/fish_basic.vmdl" ); 
 			var spawnPoint = GetSpawnPoint();
-			ragdoll.Position = spawnPoint;
-			ragdoll.SetupPhysicsFromModel(PhysicsMotionType.Dynamic, false);
-			next = 2;
+			model.Position = spawnPoint;
+			model.SetupPhysicsFromModel(PhysicsMotionType.Dynamic, false);
+			fish.Add(model);
+			nextSpawn = GetRandomNum(2, 5);
+		}
+		if(nextDespawn)
+		{
+			int chance = GetRandomNum(1,100);
+			if(fish.Count > 1)
+			{
+				if(chance <= 50)
+				{
+					var index = GetRandomNum(0, fish.Count);
+					fish[index].Delete();
+					fish.RemoveAt(index);
+				}
+			}
+			nextDespawn = GetRandomNum(4,8);
 		}
 	}
 
 	private static Vector3 GetSpawnPoint()
 	{
-		//define spawn area limits
-		var bias = 200;
+		var bias = 200; //x and y limit
 		Vector3 randomSpace = Vector3.Random * bias;
-		randomSpace.z = 80;
+		randomSpace.z = 80; //set z to specific height
 		return randomSpace;
+	}
+
+	private static int GetRandomNum(int min, int max)
+	{
+		Random rnd = new Random();
+		int num = rnd.Next(min, max);
+		return num;
 	}
 }
