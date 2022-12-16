@@ -17,7 +17,6 @@ partial class Pawn : AnimatedEntity
 		// Use a watermelon model
 		//
 		SetModel( "models/sbox_props/watermelon/watermelon.vmdl" );
-
 		EnableDrawing = true;
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
@@ -52,12 +51,14 @@ partial class Pawn : AnimatedEntity
 		// If we're running serverside and Attack1 was just pressed, spawn a ragdoll
 		if ( Game.IsServer && Input.Pressed( InputButton.PrimaryAttack ) )
 		{
-			var ragdoll = new ModelEntity();
-			ragdoll.SetModel( "models/fish_basic.vmdl" );
-			ragdoll.Position = Position + Rotation.Forward * 40;
-			ragdoll.Rotation = Rotation.LookAt( Vector3.Random.Normal );
-			ragdoll.SetupPhysicsFromModel( PhysicsMotionType.Dynamic, false );
-			ragdoll.PhysicsGroup.Velocity = Rotation.Forward * 1000;
+			TraceResult tr = Trace.Ray(AimRay, 5000)
+				.WithTag("fish")
+				.Run();
+			if(tr.Hit)
+			{
+				Log.Info("hit");
+				DebugOverlay.Sphere(tr.EndPosition, 2.0f, Color.Red, duration: 10.0f);
+			}
 		}
 	}
 

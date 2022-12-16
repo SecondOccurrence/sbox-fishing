@@ -10,13 +10,14 @@ public partial class MyGame : Sandbox.GameManager
 	TimeUntil nextSpawn = GetRandomNum(2, 5);
 	TimeUntil nextDespawn = GetRandomNum(4, 8);
 	List<ModelEntity> fish = new List<ModelEntity>();
-	public override void FrameSimulate( IClient cl )
+	public override void Simulate( IClient cl )
 	{
-		base.FrameSimulate( cl );
+		base.Simulate( cl );
 		if(nextSpawn)
 		{
 			var model = new ModelEntity();
 			model.SetModel( "models/fish_basic.vmdl" ); 
+			model.Tags.Add("fish");
 			var spawnPoint = GetSpawnPoint();
 			model.Position = spawnPoint;
 			model.SetupPhysicsFromModel(PhysicsMotionType.Dynamic, false);
