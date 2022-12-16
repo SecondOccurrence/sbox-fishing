@@ -13,30 +13,33 @@ public partial class MyGame : Sandbox.GameManager
 	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
-		if(nextSpawn)
+		if(Game.IsServer)
 		{
-			var model = new ModelEntity();
-			model.SetModel( "models/fish_basic.vmdl" ); 
-			model.Tags.Add("fish");
-			var spawnPoint = GetSpawnPoint();
-			model.Position = spawnPoint;
-			model.SetupPhysicsFromModel(PhysicsMotionType.Dynamic, false);
-			fish.Add(model);
-			nextSpawn = GetRandomNum(2, 5);
-		}
-		if(nextDespawn)
-		{
-			int chance = GetRandomNum(1,100);
-			if(fish.Count > 1)
+			if(nextSpawn)
 			{
-				if(chance <= 50)
-				{
-					var index = GetRandomNum(0, fish.Count);
-					fish[index].Delete();
-					fish.RemoveAt(index);
-				}
+				var model = new ModelEntity();
+				model.SetModel( "models/fish_basic.vmdl" ); 
+				model.Tags.Add("fish");
+				var spawnPoint = GetSpawnPoint();
+				model.Position = spawnPoint;
+				model.SetupPhysicsFromModel(PhysicsMotionType.Dynamic, false);
+				fish.Add(model);
+				nextSpawn = GetRandomNum(2, 5);
 			}
-			nextDespawn = GetRandomNum(4,8);
+			if(nextDespawn)
+			{
+				int chance = GetRandomNum(1,100);
+				if(fish.Count > 1)
+				{
+					if(chance <= 50)
+					{
+						var index = GetRandomNum(0, fish.Count);
+						fish[index].Delete();
+						fish.RemoveAt(index);
+					}
+				}
+				nextDespawn = GetRandomNum(4,8);
+			}
 		}
 	}
 

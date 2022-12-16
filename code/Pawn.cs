@@ -51,13 +51,20 @@ partial class Pawn : AnimatedEntity
 		// If we're running serverside and Attack1 was just pressed, spawn a ragdoll
 		if ( Game.IsServer && Input.Pressed( InputButton.PrimaryAttack ) )
 		{
-			TraceResult tr = Trace.Ray(AimRay, 5000)
+			TraceResult tr = Trace.Ray(AimRay, 10000)
 				.WithTag("fish")
 				.Run();
 			if(tr.Hit)
 			{
-				Log.Info("hit");
-				DebugOverlay.Sphere(tr.EndPosition, 2.0f, Color.Red, duration: 10.0f);
+				if(tr.Entity.Tags.Has("hooked"))
+				{
+					Log.Info("caught");
+					tr.Entity.Delete();
+				}
+				else
+				{
+					tr.Entity.Tags.Add("hooked");
+				}
 			}
 		}
 	}

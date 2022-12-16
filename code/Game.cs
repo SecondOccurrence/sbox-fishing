@@ -1,8 +1,9 @@
 ﻿using Sandbox;
-using Sandbox.UI.Construct;
+using Sandbox.UI;
 using System;
 using System.IO;
 using System.Linq;
+using UI;
 
 namespace Fishing.Manager;
 
@@ -10,6 +11,11 @@ public partial class MyGame : Sandbox.GameManager
 {
 	public MyGame()
 	{
+		if(Game.IsClient)
+		{
+			Game.RootPanel = new RootPanel();
+			Game.RootPanel.AddChild<HUD>();
+		}
 	}
 
 	public override void ClientJoined( IClient client )
