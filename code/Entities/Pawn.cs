@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace Sandbox;
+namespace Player;
 
 partial class Pawn : AnimatedEntity
 {

@@ -16,7 +16,7 @@
     "GameNetworkType": "Multiplayer",
     "MapSelect": "Unrestricted",
     "MapList": [
-      "maps/testing_grounds"
+      "maps\\updates_testing_grounds"
     ],
     "RankType": "None",
     "PerMapRanking": false,

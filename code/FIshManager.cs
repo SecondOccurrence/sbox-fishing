@@ -17,9 +17,7 @@ public partial class MyGame : Sandbox.GameManager
 		{
 			if(nextSpawn)
 			{
-				var model = new ModelEntity();
-				model.SetModel( "models/fish_basic.vmdl" ); 
-				model.Tags.Add("fish");
+				var model = new Fish();
 				var spawnPoint = GetSpawnPoint();
 				model.Position = spawnPoint;
 				model.SetupPhysicsFromModel(PhysicsMotionType.Dynamic, false);

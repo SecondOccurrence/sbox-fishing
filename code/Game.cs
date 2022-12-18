@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Linq;
 using UI;
+using Player;
 
 namespace Fishing.Manager;
 
