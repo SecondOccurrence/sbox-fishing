@@ -18,9 +18,7 @@ public partial class MyGame : Sandbox.GameManager
 			if(nextSpawn)
 			{
 				var model = new Fish();
-				var spawnPoint = GetSpawnPoint();
-				model.Position = spawnPoint;
-				model.SetupPhysicsFromModel(PhysicsMotionType.Dynamic, false);
+
 				fish.Add(model);
 				nextSpawn = GetRandomNum(2, 5);
 			}
@@ -39,14 +37,6 @@ public partial class MyGame : Sandbox.GameManager
 				nextDespawn = GetRandomNum(4,8);
 			}
 		}
-	}
-
-	private static Vector3 GetSpawnPoint()
-	{
-		var bias = 200; //x and y limit
-		Vector3 randomSpace = Vector3.Random * bias;
-		randomSpace.z = 80; //set z to specific height
-		return randomSpace;
 	}
 
 	private static int GetRandomNum(int min, int max)
