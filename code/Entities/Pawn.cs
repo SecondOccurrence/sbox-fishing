@@ -53,11 +53,8 @@ partial class Pawn : AnimatedEntity
 				.Run();
 			if(tr.Hit)
 			{
-				Log.Info("hit");
-				DebugOverlay.Sphere(tr.EndPosition, 2.0f, Color.Red, duration: 3.0f);
 				if(tr.Entity.Tags.Has("hooked"))
 				{
-					Log.Info("caught");
 					tr.Entity.Delete();
 				}
 				else

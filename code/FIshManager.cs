@@ -65,7 +65,6 @@ public partial class FishingGame : Sandbox.GameManager
 		int yRnd = rnd.Next(-xyLim, xyLim);
 		int zRnd = rnd.Next(10, 40);
 		Vector3 waypoint = new(xRnd, yRnd, zRnd);
-		//DebugOverlay.Sphere(waypoint, 2.0f, Color.Red, duration: 3.0f);
 		return waypoint;
 	}
 }
