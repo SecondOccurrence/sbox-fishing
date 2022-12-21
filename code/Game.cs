@@ -6,11 +6,11 @@ using System.Linq;
 using UI;
 using Player;
 
-namespace Fishing.Manager;
+namespace Fishing;
 
-public partial class MyGame : Sandbox.GameManager
+public partial class FishingGame : Sandbox.GameManager
 {
-	public MyGame()
+	public FishingGame()
 	{
 		if(Game.IsClient)
 		{

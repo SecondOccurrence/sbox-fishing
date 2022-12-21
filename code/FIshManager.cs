@@ -2,10 +2,11 @@ using Sandbox;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Fishing.FishTypes;
 
-namespace Fishing.Manager;
+namespace Fishing;
 
-public partial class MyGame : Sandbox.GameManager
+public partial class FishingGame : Sandbox.GameManager
 {
 	TimeUntil nextSpawn = GetRandomNum(2, 5);
 	TimeUntil nextDespawn = GetRandomNum(4, 8);
@@ -48,5 +49,23 @@ public partial class MyGame : Sandbox.GameManager
 		Random rnd = new();
 		int num = rnd.Next(min, max);
 		return num;
+	}
+
+	public static Vector3 GetSpawnPoint(int bias)
+	{
+		Vector3 randomSpace = Vector3.Random * bias;
+		randomSpace.z = 40; //set z to specific height
+		return randomSpace;
+	}
+
+	public static Vector3 GetRndWaypoint(int xyLim)
+	{
+		Random rnd = new();
+		int xRnd = rnd.Next(-xyLim, xyLim);
+		int yRnd = rnd.Next(-xyLim, xyLim);
+		int zRnd = rnd.Next(10, 40);
+		Vector3 waypoint = new(xRnd, yRnd, zRnd);
+		//DebugOverlay.Sphere(waypoint, 2.0f, Color.Red, duration: 3.0f);
+		return waypoint;
 	}
 }
