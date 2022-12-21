@@ -9,7 +9,7 @@ public partial class MyGame : Sandbox.GameManager
 {
 	TimeUntil nextSpawn = GetRandomNum(2, 5);
 	TimeUntil nextDespawn = GetRandomNum(4, 8);
-	List<ModelEntity> fish = new List<ModelEntity>();
+	List<KeyframeEntity> fish = new();
 	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
@@ -18,7 +18,6 @@ public partial class MyGame : Sandbox.GameManager
 			if(nextSpawn)
 			{
 				var model = new Fish();
-
 				fish.Add(model);
 				nextSpawn = GetRandomNum(2, 5);
 			}
@@ -36,12 +35,17 @@ public partial class MyGame : Sandbox.GameManager
 				}
 				nextDespawn = GetRandomNum(4,8);
 			}
+
+			foreach(var fish in Entity.All.OfType<Fish>())
+			{
+				fish.Simulate(cl);
+			}
 		}
 	}
 
 	private static int GetRandomNum(int min, int max)
 	{
-		Random rnd = new Random();
+		Random rnd = new();
 		int num = rnd.Next(min, max);
 		return num;
 	}

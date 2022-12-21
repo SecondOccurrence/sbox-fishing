@@ -40,9 +40,6 @@ partial class Pawn : AnimatedEntity
 		ViewAngles = viewAngles.Normal;
 	}
 
-	/// <summary>
-	/// Called every tick, clientside and serverside.
-	/// </summary>
 	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
