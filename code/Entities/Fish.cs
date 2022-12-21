@@ -34,7 +34,7 @@ public partial class Fish : KeyframeEntity
     private static Vector3 GetSpawnPoint(int bias)
 	{
 		Vector3 randomSpace = Vector3.Random * bias;
-		randomSpace.z = 80; //set z to specific height
+		randomSpace.z = 45; //set z to specific height
 		return randomSpace;
 	}
 
@@ -43,7 +43,7 @@ public partial class Fish : KeyframeEntity
 		Random rnd = new();
 		int xRnd = rnd.Next(-xyLim, xyLim);
 		int yRnd = rnd.Next(-xyLim, xyLim);
-		int zRnd = rnd.Next(10, 50);
+		int zRnd = rnd.Next(10, 45);
 		Vector3 waypoint = new(xRnd, yRnd, zRnd);
 		//DebugOverlay.Sphere(waypoint, 2.0f, Color.Red, duration: 3.0f);
 		return waypoint;
