@@ -15,9 +15,10 @@ public partial class Fish : KeyframeEntity
         this.Tags.Add("fish");
         var spawnPoint = GetSpawnPoint(bias);
 		this.Position = spawnPoint;
-		//model.SetupPhysicsFromModel(PhysicsMotionType.Dynamic, false);
 		waypoint = GetRndWaypoint(bias);
-		this.KeyframeTo(new Transform(waypoint), 3.0f);
+		var distance = waypoint.Distance(Position);
+		var time = Convert.ToSingle(distance * 0.01);
+		this.KeyframeTo(new Transform(waypoint), time);
 	}
 
 	public override void Simulate(IClient cl)
@@ -27,7 +28,9 @@ public partial class Fish : KeyframeEntity
 		if(this.Position == waypoint)
 		{
 			waypoint = GetRndWaypoint(bias);
-			this.KeyframeTo(new Transform(waypoint), 3.0f);
+			var distance = waypoint.Distance(Position);
+			var time = Convert.ToSingle(distance * 0.01);
+			this.KeyframeTo(new Transform(waypoint), time);
 		}
 	}
 
