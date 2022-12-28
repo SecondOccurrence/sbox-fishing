@@ -18,7 +18,7 @@ public partial class FishingGame : Sandbox.GameManager
 		{
 			if(nextSpawn)
 			{
-				var model = new Fish();
+				var model = new FishBase();
 				fish.Add(model);
 				nextSpawn = GetRandomNum(2, 5);
 			}
@@ -37,7 +37,7 @@ public partial class FishingGame : Sandbox.GameManager
 				nextDespawn = GetRandomNum(4,8);
 			}
 
-			foreach(var fish in Entity.All.OfType<Fish>())
+			foreach(var fish in Entity.All.OfType<FishBase>())
 			{
 				fish.Simulate(cl);
 			}

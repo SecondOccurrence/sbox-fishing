@@ -24,6 +24,20 @@
 				]
 			},
 			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsHullFromRender"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						faceMergeAngle = 20.0
+						maxHullVertices = 32
+					},
+				]
+			},
+			{
 				_class = "RenderMeshList"
 				children = 
 				[
@@ -48,23 +62,9 @@
 					},
 				]
 			},
-			{
-				_class = "PhysicsShapeList"
-				children = 
-				[
-					{
-						_class = "PhysicsHullFromRender"
-						parent_bone = ""
-						surface_prop = "flesh"
-						collision_tags = "solid"
-						faceMergeAngle = 35.919998
-						maxHullVertices = 32
-					},
-				]
-			},
 		]
-		model_archetype = "default"
-		primary_associated_entity = "fish"
+		model_archetype = ""
+		primary_associated_entity = ""
 		anim_graph_name = ""
 		base_model_name = ""
 	}
