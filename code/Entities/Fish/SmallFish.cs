@@ -10,7 +10,7 @@ public class SmallFish : FishBase
     public override void Spawn()
     {
         base.Spawn();
-        this.SetModel("././models/fish_basic.vmdl");
+        this.SetModel("././models/small_fish.vmdl");
         base.NextMove(speed);
     }
 
