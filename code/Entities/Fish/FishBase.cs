@@ -10,9 +10,10 @@ public partial class FishBase : KeyframeEntity
 	readonly int bias = 200; //used to determine x and y coordinate spawn area
 	protected Vector3 waypoint; //the position which the fish is actively moving towards
 
-	public void FishSpawn()
+	public override void Spawn()
 	{
 		//setup the fish
+		base.Spawn();
         Tags.Add("fish");
         var spawnPoint = FishingGame.GetSpawnPoint(bias);
 		this.Position = spawnPoint;
